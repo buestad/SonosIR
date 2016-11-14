@@ -79,7 +79,7 @@ void setup()
 void loop() 
 {
   unsigned long now = millis();
-  if((unsigned long)(now - lastSonos) > SONOS_STATUS_POLL_DELAY_MS)
+  if((unsigned long)(now - lastSonos) > (SONOS_STATUS_POLL_DELAY_S*1000) )
   { 
     pollSonos();
     lastSonos = now; 
@@ -176,7 +176,7 @@ void pollSonos()
   }
   if(offTimer > 0 && cPlay)
   {
-    offTimer --;//=(SONOS_STATUS_POLL_DELAY_MS / 1000.0);
+    offTimer -= SONOS_STATUS_POLL_DELAY_S;
   }
   if(offTimer == 0 && cPlay)
   {
